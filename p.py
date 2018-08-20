@@ -1,7 +1,9 @@
 import pygame, sys
 from pygame.locals import *
-
+from Player import  Player
 pygame.init()
+
+
 
 
 
@@ -21,7 +23,8 @@ while True:
     pygame.display.flip()
     screen.blit(bgOne, (bgOne_x, 0))
     screen.blit(bgTwo, (bgTwo_x, 0))
-    screen.blit(tux, (tux_pos_x, tux_pos_y))
+    screen.blit(tux,(tux_pos_x,tux_pos_y))
+
 
     pygame.display.update()
 
@@ -35,7 +38,14 @@ while True:
         bgTwo_x = bgOne_x + bgOne.get_width()
 
     for event in pygame.event.get():
+        a = 1
         if event.type == QUIT or (event.type == KEYUP and event.key == K_ESCAPE):
-            sys.exit()
+            #sys.exit()
+        #if event.type == (event.type == KEYUP and event.key == K_UP):
+            for a in range(40):
+                tux_pos_y -= 5
+                if tux_pos_y == 300:
+                        tux_pos_y += 5
+
 
     clock.tick(100000)
