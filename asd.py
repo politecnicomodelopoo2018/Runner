@@ -1,53 +1,64 @@
+# -*- encoding: utf-8 -*-
 import pygame
-from pygame.locals import *
-import sys
+from pygame import QUIT, K_LEFT, K_RIGHT, K_UP
 
-SCREEN_WIDTH = 1000
-SCREEN_HEIGHT = 600
+screen = pygame.display.set_mode((800, 800))
+salir = False
 
+bgOne = pygame.image.load('rsz_1rsz_canvas.png')
+color_negro = (0, 0, 0)
+color_rojo = (200, 0, 0)
 
-def main():
-    bgOne = pygame.image.load('canvas.png')
-    bgTwo = pygame.image.load('canvas.png')
-    tux_pos_x = 0
-    tux_pos_y = 0
-    bgOne_x = 0
-    bgTwo_x = bgOne.get_width()
-    pygame.init()
-    screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
-    pygame.display.set_caption("Boke games")
-    fondo = pygame.image.load("akinfeev-celebration-1.jpg").convert()
-    tux = pygame.image.load("E58.png").convert_alpha()
-    background_size = fondo.get_size()
-    background_rect = fondo.get_rect()
-    screen = pygame.display.set_mode(background_size)
-    screen.blit(fondo, (0, 0))
-    screen.blit(tux, (tux_pos_x, tux_pos_y))
+tux = pygame.image.load("E58.png")
+# variables del personaje
+personaje = pygame.Rect((0, 0, 30, 30))
+dy = 0
+x = 40
+y = 600 - tux.get_height()
+GRAVEDAD = 0.02
+
+# linea horizontal que representa el suelo
+pos_suelo = 600
+
+while not salir:
+    pygame.display.flip()
+    screen.blit(bgOne, (0, 0))
+
+    # Actualización de eventos
+    for e in pygame.event.get():
+        if e.type == QUIT:
+            salir = True
+
+    # Actualización del personaje
+    key = pygame.key.get_pressed()
+
+    # animación de salto
+    if dy == 0:               # si está en el suelo..."
+        if key[K_UP]:
+            dy = -2
+    else:
+        y += dy                  # empuja el personaje hacia abajo
+        dy += GRAVEDAD           # y acelera su caida
+
+        if y > pos_suelo - tux.get_height():        # detiene la caida en el suelo
+            dy = 0
+            y = pos_suelo - tux.get_height()
+
+    # aplica la posición al personaje
+    #personaje.bottom = int(y)
+    #personaje.centerx = int(x)
+
+    # Actualización gráfica
+    #screen.fill((200, 200, 200))
+
+    #screen.fill(color_rojo, personaje)
+    screen.blit(tux, (int(x), int(y)))
+    pygame.draw.line(screen, color_negro, (0, pos_suelo), (800, pos_suelo))
+    pygame.display.update()
     pygame.display.flip()
 
-    while True:
-
-        tux_pos_x = tux_pos_x + 1
-        pygame.display.flip()
-        screen.blit(bgOne, (bgOne_x, 0))
-        screen.blit(bgTwo, (bgTwo_x, 0))
-        screen.blit(tux, (tux_pos_x, tux_pos_y))
-        pygame.display.update()
-        if tux_pos_x == 820:
-            tux_pos_x = 0
-        if bgOne_x == -1 * bgOne.get_width():
-            bgOne_x = bgTwo_x + bgTwo.get_width()
-        if bgTwo_x == -1 * bgTwo.get_width():
-            bgTwo_x = bgOne_x + bgOne.get_width()
-
-        for event in pygame.event.get():
-            if event.type == QUIT or (event.type == KEYUP and event.key == K_ESCAPE):
-                sys.exit()
 
 
 
-if __name__ == "__main__":
-    main()
-
-
-
+    # Espera un instante
+    pygame.time.wait(1)
