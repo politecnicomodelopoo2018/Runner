@@ -1,14 +1,16 @@
-import pygame, sys
-from pygame.locals import *
-
-class Player(object):
-
-
-
+class Player(pygame.sprite.Sprite):
     def __init__(self):
-        self.image1 =  pygame.image.load("Sprites/1.png")
-        self.image2 =  pygame.image.load("Sprites/2.png")
+        pygame.sprite.Sprite.__init__(self)
+        self.image = pygame.image.load('rsz_1rsz_coin_-_new_super_mario_bros.png')
+        self.rect = self.image.get_rect()
+        self.rect.center = (300,300)
 
-        for event in pygame.event.get():
-            if event.type == (event.type is not w ):
-                screen.blit(bgTwo, (self.image1))
+    def update(self):
+        self.rect.x += 5
+
+
+all_sprites = pygame.sprite.Group()
+player = Player()
+all_sprites.add(player)
+
+all_sprites.draw(screen)
