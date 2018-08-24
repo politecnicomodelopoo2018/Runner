@@ -19,28 +19,27 @@ class Coin(pygame.sprite.Sprite):
         self.image = pygame.image.load('rsz_1rsz_coin_-_new_super_mario_bros.png')
         self.rect = self.image.get_rect()
         self.rect.center = (300, 300)
+
 class Player(pygame.sprite.Sprite):
     def __init__(self):
         pygame.sprite.Sprite.__init__(self)
         self.image = pygame.image.load('rsz_e58.png')
         self.rect = self.image.get_rect()
-        self.rect.center = (0, 300)
-
+        self.rect.center = (40, 423)
+        self.rect.x = 40
+        self.rect.y = 423
+        self.GRAVEDAD = 0.02
+        self.dy = 0
 
 tux = pygame.image.load("rsz_e58.png")
 all_sprites = pygame.sprite.Group()
-player = Coin()
-all_sprites.add(player)
-dy = 0
-y_coin = 300
-x = 40
-y = 600 - tux.get_height()
-GRAVEDAD = 0.02
-
-
+coine = Coin()
+player = Player()
+all_sprites.add(coine,player)
 pos_suelo = 600
 
 while not salir:
+
     pygame.display.flip()
     screen.blit(bgOne, (bgOne_x, 0))
     screen.blit(bgTwo, (bgTwo_x, 0))
@@ -69,21 +68,22 @@ while not salir:
     if bgTwo_x == -1 * coin2.get_width():
         bgTwo_x = bgOne_x + coin.get_width()
 
-    if dy == 0:
+    if player.dy == 0:
         if key[K_UP]:
-            dy = -3
+            player.dy = -2
     else:
-        y += dy
-        dy += GRAVEDAD
+        player.rect.y += player.dy
+        player.dy += player.GRAVEDAD
 
-        if y > pos_suelo - tux.get_height():
-            dy = 0
-            y = pos_suelo - tux.get_height()
+        if player.rect.y > pos_suelo - tux.get_height():
+            player.dy = 0
+            player.rect.y = pos_suelo - tux.get_height()
 
 
 
     pygame.draw.line(screen, color_negro, (0, pos_suelo), (800, pos_suelo))
-    screen.blit(tux, (int(x), int(y)))
+    #
+    # screen.blit(tux, (int(x), int(y)))
 
     pygame.display.update()
     pygame.display.flip()
