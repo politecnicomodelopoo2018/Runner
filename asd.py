@@ -90,7 +90,8 @@ while not salir:
         coine.kill()
         coine.Muerto = True
 
-
+    if coine.Muerto:
+        all_sprites.add(coine)
 
     pygame.draw.line(screen, color_negro, (0, pos_suelo), (800, pos_suelo))
 
