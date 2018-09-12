@@ -15,8 +15,6 @@ bgOne = pygame.image.load('rsz_1rsz_canvas.png')
 bgTwo = pygame.image.load('rsz_1rsz_canvas.png')
 bgOne_x = 0
 bgTwo_x = bgOne.get_width()
-coin = pygame.image.load('rsz_1rsz_coin_-_new_super_mario_bros.png')
-coin2 = pygame.image.load('rsz_1rsz_coin_-_new_super_mario_bros.png')
 myfont = pygame.font.SysFont("monospace", 16)
 WHITE = (255,255,255)
 
@@ -34,7 +32,7 @@ class Coin(pygame.sprite.Sprite):
 class Enemy(pygame.sprite.Sprite):
     def __init__(self):
         pygame.sprite.Sprite.__init__(self)
-        self.image = pygame.image.load('hiler.png')
+        self.image = pygame.image.load('cono2.png')
         self.rect = self.image.get_rect()
         self.rect.center = (100, 530)
         self.Muerto = False
@@ -61,9 +59,9 @@ player = Player()
 coine = Coin()
 ene = Enemy()
 all_sprites.add(coine,player,ene)
-pos_suelo = 600
+pos_suelo = 550
 score = 0
-y_tux = 300
+y_tux = 400
 shet = 0
 score = 0
 
@@ -94,11 +92,11 @@ while not salir:
         bgTwo_x = bgOne_x + bgOne.get_width()
 
     coine.bg_one(bgOne_x+shet)
-    ene.bg_one(bgOne_x+900)
+    ene.bg_one(bgOne_x+800)
 
     if player.dy == 0:
         if key[K_UP]:
-            player.dy = -2.5
+            player.dy = -2
     else:
         player.rect.y += player.dy
         player.dy += player.GRAVEDAD
