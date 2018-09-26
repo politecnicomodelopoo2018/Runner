@@ -16,7 +16,7 @@ class player(pygame.sprite.Sprite):
         self.rect.y=300
         self.rect.x = 300
 
-    def saltar(self):
+    def saltar(self,suelo):
         self.saltando=True
         self.quieto=False
         self.bajando=False
@@ -28,11 +28,16 @@ class player(pygame.sprite.Sprite):
 
         if self.bajando is False:
 
-            for i in range(20):
-                if i <= 10:
-                    self.rect.y -= 0.5
-                elif i > 10:
-                    self.rect.y += 0.5
+            if self.dy == 0:
+                self.dy = -2
+
+            else:
+                self.rect.y += self.dy
+                self.dy += self.GRAVEDAD
+
+                if self.rect.y > suelo:
+                    self.dy = 0
+                    self.rect.y = suelo
 
         if self.bajando:
             self.rect.y -= 15
