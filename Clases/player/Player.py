@@ -20,13 +20,13 @@ class player(pygame.sprite.Sprite):
         return self.rect.colliderect(sprite.rect)
 
     def salto(self,key):
-        if self.dy == 0:  # si está en el suelo..."
+        if self.dy == 0:
             if key[K_UP]:
                 self.dy = -3.5
         else:
             self.rect.y += self.dy
             self.dy += self.GRAVEDAD
-            if self.rect.y > 300:  # detiene la caida en el suelo
+            if self.rect.y > 300:
                 self.dy = 0
                 self.rect.y = 300
 
