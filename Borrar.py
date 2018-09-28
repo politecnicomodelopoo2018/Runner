@@ -16,19 +16,17 @@ pos_suelo=300+240
 GRAVEDAD = 0.05
 dy = 0
 while True:
+    v.fuera_pantalla()
     # Actualización de eventos
     for e in pygame.event.get():
         if e.type == QUIT:
             salir = True
-    v.rect.x -=3
+    v.moverse()
 
-    # Actualización del personaje
     key = pygame.key.get_pressed()
     p.salto(key)
-    if v.rect.x <= -200:
-        v.moverse()
     if p.colision(v):
-        v.moverse()
+        v.fuera()
     if p.colision(en):
         en.fuera()
     en.moverse()

@@ -15,7 +15,12 @@ class vida(pygame.sprite.Sprite):
         self.rect.x = 500
 
     def moverse(self):
-        self.rect.x = 1400
+        self.rect.x -= 3
+    def fuera_pantalla(self):
+        if self.rect.x <= -200:
+            self.fuera()
+    def fuera(self):
+        self.rect.x=1400
 
     def colision(self, sprite):
         return self.rect.colliderect(sprite.rect)
