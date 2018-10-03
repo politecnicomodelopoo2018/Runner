@@ -3,6 +3,14 @@ from Clases.player.Player import player
 from Clases.Vidas.Vida import vida
 from Clases.Enemigo.Enemigo import enemigo
 import pygame
+
+# highscore
+# obstaculos/pozos
+#en la base de datos que se epuedan crear los mapas
+#al comienzo que le pregunte que mapa quiere usar o manejarlo por nivel
+#diferentes personajes
+
+
 from pygame import QUIT, K_LEFT, K_RIGHT, K_UP
 p = player()
 v = vida()
@@ -12,7 +20,6 @@ all_sprites = pygame.sprite.Group()
 all_sprites.add(p,v,en)
 BLACK=(0,0,0)
 pos_suelo=300+240
-GRAVEDAD = 0.05
 dy = 0
 pygame.init()
 
@@ -21,10 +28,19 @@ while True:
         if e.type == QUIT:
             salir = True
 
+        if e.type == pygame.KEYDOWN:
+            if e.key == pygame.K_DOWN:
+                p.Agacharse(True)
+
+        if e.type == pygame.KEYUP:
+            if e.key == pygame.K_DOWN:
+                p.Pararse(True)
+
     v.fuera_pantalla()
     v.moverse()
     key = pygame.key.get_pressed()
     p.salto(key)
+
 
     if p.colision(v):
         v.fuera()

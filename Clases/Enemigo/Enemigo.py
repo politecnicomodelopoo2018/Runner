@@ -11,7 +11,7 @@ class enemigo(pygame.sprite.Sprite):
         self.rect.y = 445
         self.rect.x = 1300
     def moverse(self):
-        self.rect.x -= 3
+        self.rect.x -= 3.5
     def fuera_pantalla(self):
         if self.rect.x <= -200:
             self.fuera()
