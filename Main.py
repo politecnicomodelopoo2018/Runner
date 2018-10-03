@@ -2,6 +2,7 @@
 from Clases.player.Player import player
 from Clases.Vidas.Vida import vida
 from Clases.Enemigo.Enemigo import enemigo
+from Clases.Text.Text import score
 import pygame
 
 # highscore
@@ -12,21 +13,26 @@ import pygame
 
 
 from pygame import QUIT, K_LEFT, K_RIGHT, K_UP
+pygame.init()
 p = player()
 v = vida()
 en = enemigo()
+S = score()
+
+pygame.display.set_caption("testing")
 screen = pygame.display.set_mode((1280, 700))
 all_sprites = pygame.sprite.Group()
 all_sprites.add(p,v,en)
 BLACK=(0,0,0)
 pos_suelo=300+240
 dy = 0
-pygame.init()
 
-while True:
+
+while not salir:
     for e in pygame.event.get():
-        if e.type == QUIT:
-            salir = True
+        if e.type == pygame.KEYDOWN:
+            if e.key == pygame.K_DOWN:
+                salir = True
 
         if e.type == pygame.KEYDOWN:
             if e.key == pygame.K_DOWN:
@@ -53,6 +59,7 @@ while True:
     screen.fill((200, 200, 200))
     all_sprites.draw(screen)
     pygame.draw.line(screen, BLACK, (0, pos_suelo), (1280, pos_suelo))
+    screen.blit(S.scoretext, (5, 10))
     pygame.display.flip()
     pygame.time.wait(1)
 
