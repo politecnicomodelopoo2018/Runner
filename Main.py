@@ -5,11 +5,11 @@ from Clases.Enemigo.Enemigo import enemigo
 from Clases.Text.Text import score
 import pygame
 
-# highscore
+# highscore en bdd
 # obstaculos/pozos
-#en la base de datos que se epuedan crear los mapas
-#al comienzo que le pregunte que mapa quiere usar o manejarlo por nivel
-#diferentes personajes
+# en bdd que se epuedan crear los mapas
+# al comienzo que le pregunte que mapa quiere usar o manejarlo por nivel
+# diferentes personajes
 
 
 from pygame import QUIT, K_LEFT, K_RIGHT, K_UP
@@ -18,7 +18,7 @@ p = player()
 v = vida()
 en = enemigo()
 S = score()
-
+salir = False
 pygame.display.set_caption("testing")
 screen = pygame.display.set_mode((1280, 700))
 all_sprites = pygame.sprite.Group()
@@ -31,7 +31,7 @@ dy = 0
 while not salir:
     for e in pygame.event.get():
         if e.type == pygame.KEYDOWN:
-            if e.key == pygame.K_DOWN:
+            if e.key == pygame.K_ESCAPE:
                 salir = True
 
         if e.type == pygame.KEYDOWN:
@@ -50,8 +50,10 @@ while not salir:
 
     if p.colision(v):
         v.fuera()
+        S.score=+100
     if p.colision(en):
         en.fuera()
+
 
     en.moverse()
     en.fuera_pantalla()
@@ -60,6 +62,7 @@ while not salir:
     all_sprites.draw(screen)
     pygame.draw.line(screen, BLACK, (0, pos_suelo), (1280, pos_suelo))
     screen.blit(S.scoretext, (5, 10))
+    #en.cambiar_sprite(en.estado)
     pygame.display.flip()
     pygame.time.wait(1)
 

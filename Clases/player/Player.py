@@ -6,11 +6,11 @@ class player(pygame.sprite.Sprite):
 
     def __init__(self):
         super().__init__()
-        self.image=pygame.image.load('imagenes/Player/Player.png')
+        self.image=pygame.image.load('imagenes/Player/Normal.png')
         self.muerto=False
         self.maximo=100
         self.rect = self.image.get_rect()
-        self.rect.y=300
+        self.rect.y=317
         self.rect.x = 300
         self.GRAVEDAD = 0.05
         self.dy = 0
@@ -30,9 +30,9 @@ class player(pygame.sprite.Sprite):
         else:
             self.rect.y += self.dy
             self.dy += self.GRAVEDAD
-            if self.rect.y > 300:
+            if self.rect.y > 317:
                 self.dy = 0
-                self.rect.y = 300
+                self.rect.y = 317
                 self.saltando = False
 
     def Agacharse(self,C):
@@ -49,7 +49,7 @@ class player(pygame.sprite.Sprite):
         if not self.agachado:
             if self.saltando is False:
                 self.image = pygame.image.load('imagenes/Player/Player.png')
-                self.rect.y = 300
+                self.rect.y = 317
 
 
 
