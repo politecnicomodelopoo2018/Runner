@@ -5,7 +5,8 @@ class enemigo(pygame.sprite.Sprite):
 
     def __init__(self):
         super().__init__()
-        self.image = pygame.image.load('imagenes/Enemys/1.png')
+        self.image = pygame.image.load('imagenes/Enemys/rsz_1rsz_mario_fireball.gif')
+        self.sprites=[pygame.image.load('imagenes/Enemys/1.png'),pygame.image.load('imagenes/Enemys/2.png')]
         self.muerto = False
         self.rect = self.image.get_rect()
         self.rect.y = 445
@@ -15,12 +16,18 @@ class enemigo(pygame.sprite.Sprite):
 
 
     def moverse(self):
-        self.rect.x -= 3.5
+        self.rect.x -= 4
     def fuera_pantalla(self):
         if self.rect.x <= -200:
             self.fuera()
     def fuera(self):
         self.rect.x=1360
-
+    def cambiar_sprite(self,estado):
+        if estado == 0:
+            self.image=self.sprites[estado]
+            self.estado=1
+        if estado == 1:
+            self.image=self.sprites[estado]
+            self.estado = 0
 
 

@@ -7,6 +7,7 @@ class player(pygame.sprite.Sprite):
     def __init__(self):
         super().__init__()
         self.image=pygame.image.load('imagenes/Player/Normal.png')
+        self.sprites=[pygame.image.load('imagenes/Player/Normal.png'),pygame.image.load('imagenes/Player/1(2).png')]
         self.muerto=False
         self.maximo=100
         self.rect = self.image.get_rect()
@@ -16,7 +17,7 @@ class player(pygame.sprite.Sprite):
         self.dy = 0
         self.agachado = False
         self.saltando=False
-
+        self.estado=0
 
     def colision(self, sprite):
         return self.rect.colliderect(sprite.rect)
@@ -28,12 +29,13 @@ class player(pygame.sprite.Sprite):
                 self.saltando = True
                 self.dy = -3.5
         else:
-            self.rect.y += self.dy
-            self.dy += self.GRAVEDAD
-            if self.rect.y > 317:
-                self.dy = 0
-                self.rect.y = 317
-                self.saltando = False
+            if self.saltando:
+                self.rect.y += self.dy
+                self.dy += self.GRAVEDAD
+                if self.rect.y > 317:
+                    self.dy = 0
+                    self.rect.y = 317
+                    self.saltando = False
 
     def Agacharse(self,C):
         if C :
@@ -50,6 +52,19 @@ class player(pygame.sprite.Sprite):
             if self.saltando is False:
                 self.image = pygame.image.load('imagenes/Player/Player.png')
                 self.rect.y = 317
+
+    def nestor_en_bloque(self):
+        self.rect.x-=4
+    def cambiar_sprite(self,estado):
+        if estado == 0:
+            self.image=self.sprites[estado]
+            self.estado=1
+        if estado == 1:
+            self.image=self.sprites[estado]
+            self.estado = 0
+
+
+
 
 
 
