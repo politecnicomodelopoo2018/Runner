@@ -6,14 +6,14 @@ class player(pygame.sprite.Sprite):
 
     def __init__(self):
         super().__init__()
-        self.image=pygame.image.load('imagenes/Player/Normal.png')
-        self.sprites=[pygame.image.load('imagenes/Player/Normal.png'),pygame.image.load('imagenes/Player/1(2).png')]
+        self.image=pygame.image.load('../../imagenes/Player/Normal.png')
+        self.sprites=[pygame.image.load('../../imagenes/Player/Normal.png'),pygame.image.load('../../imagenes/Player/1(2).png')]
         self.muerto=False
         self.maximo=100
         self.rect = self.image.get_rect()
         self.rect.y=317
         self.rect.x = 300
-        self.GRAVEDAD = 0.05
+        self.GRAVEDAD = 0.05 # Para el nivel GOD 0.1 , para el resto 0.05
         self.dy = 0
         self.agachado = False
         self.saltando=False
@@ -27,7 +27,7 @@ class player(pygame.sprite.Sprite):
         if self.dy == 0:
             if key[K_UP]:
                 self.saltando = True
-                self.dy = -3.5
+                self.dy = -3.5 # Para el nivel GOD 5 , para el resto -3.5
         else:
             if self.saltando:
                 self.rect.y += self.dy
@@ -43,14 +43,14 @@ class player(pygame.sprite.Sprite):
 
         if self.agachado:
             if  self.saltando is False:
-                self.image = pygame.image.load('imagenes/Player/Agachado.png')
+                self.image = pygame.image.load('../../imagenes/Player/Agachado.png')
                 self.rect.y = 400
     def Pararse(self,C):
         if C:
             self.agachado = False
         if not self.agachado:
             if self.saltando is False:
-                self.image = pygame.image.load('imagenes/Player/Player.png')
+                self.image = pygame.image.load('../../imagenes/Player/Player.png')
                 self.rect.y = 317
 
     def nestor_en_bloque(self):
@@ -62,6 +62,9 @@ class player(pygame.sprite.Sprite):
         if estado == 1:
             self.image=self.sprites[estado]
             self.estado = 0
+    def fuera_pantalla(self):
+        if self.rect.x <= -280:
+            return True
 
 
 

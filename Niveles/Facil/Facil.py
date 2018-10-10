@@ -5,7 +5,7 @@ from Clases.Enemigo.Enemigo import enemigo
 from Clases.Text.Text import score
 from Clases.Obstaculo.Obstaculo import obstaculo
 import pygame
-
+from Clases.Colores import Colores
 # highscore en bdd
 # obstaculos/pozos
 # en bdd que se epuedan crear los mapas
@@ -18,21 +18,17 @@ pygame.init()
 p = player()
 ob = obstaculo()
 v = vida()
-en = enemigo()
 S = score()
 salir = False
 pygame.display.set_caption("testing")
 screen = pygame.display.set_mode((1280, 700))
 all_sprites = pygame.sprite.Group()
 all_sprites.add(p,v,ob)
-Gris = (200,200,200)
-Negro = (0,0,0)
-Blanco = (255,255,255)
-ColorF = Gris
-ColorL = Negro
 pos_suelo=300+240
 dy = 0
-
+Negro = (0, 0, 0)
+Blanco = (255, 255, 255)
+Gris = (200, 200, 200)
 
 while not salir:
     for e in pygame.event.get():
@@ -49,32 +45,23 @@ while not salir:
                 p.Pararse(True)
 
     v.fuera_pantalla()
-    v.moverse()
+    v.moverse(0)
     key = pygame.key.get_pressed()
     p.salto(key)
-    ob.fuera_pantalla()
-    ob.moverse()
 
+    if p.fuera_pantalla():
+        salir = True
     if p.colision(v):
         v.fuera()
         S.score +=100
-    if p.colision(en):
-        en.fuera()
-        salir = True
-
-    if S.score == 500:
-        ColorF=Negro
-        ColorL = Blanco
-        S.Color = Blanco
     if p.colision(ob):
         p.nestor_en_bloque()
-    #en.moverse()
-    #en.fuera_pantalla()
-    screen.fill(ColorF)
+    ob.moverse()
+    ob.fuera_pantalla()
+    screen.fill(Gris)
     all_sprites.draw(screen)
-    pygame.draw.line(screen, ColorL, (0, pos_suelo), (1280, pos_suelo))
+    pygame.draw.line(screen, Negro, (0, pos_suelo), (1280, pos_suelo))
     screen.blit(S.show(S.score), (5, 10))
-    en.cambiar_sprite(en.estado)
     v.cambiar_sprite(v.estado)
     p.cambiar_sprite(p.estado)
     pygame.display.flip()

@@ -6,10 +6,10 @@ class vida(pygame.sprite.Sprite):
 
     def __init__(self):
         super().__init__()
-        self.image=pygame.image.load('imagenes/Vidas/1.png')
-        self.sprites=[pygame.image.load('imagenes/Vidas/1.png'),pygame.image.load('imagenes/Vidas/2.png'),
-                      pygame.image.load('imagenes/Vidas/3.png'),pygame.image.load('imagenes/Vidas/4.png'),
-                      pygame.image.load('imagenes/Vidas/5.png'),pygame.image.load('imagenes/Vidas/6.png')]
+        self.image=pygame.image.load('../../imagenes/Vidas/1.png')
+        self.sprites=[pygame.image.load('../../imagenes/Vidas/1.png'),pygame.image.load('../../imagenes/Vidas/2.png'),
+                      pygame.image.load('../../imagenes/Vidas/3.png'),pygame.image.load('../../imagenes/Vidas/4.png'),
+                      pygame.image.load('../../imagenes/Vidas/5.png'),pygame.image.load('../../imagenes/Vidas/6.png')]
         self.muerto=False
         self.quieto=True
         self.moviendose=True
@@ -18,8 +18,8 @@ class vida(pygame.sprite.Sprite):
         self.rect.x = 500
         self.estado=0
 
-    def moverse(self):
-        self.rect.x -= 4
+    def moverse(self,plus):
+        self.rect.x -= 4+plus
     def fuera_pantalla(self):
         if self.rect.x <= -200:
             self.fuera()
@@ -41,7 +41,6 @@ class vida(pygame.sprite.Sprite):
         if estado==3:
             self.image=self.sprites[estado]
             self.estado=4
-
         if estado==4:
             self.image=self.sprites[estado]
             self.estado=5

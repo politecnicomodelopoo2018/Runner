@@ -5,7 +5,7 @@ class obstaculo(pygame.sprite.Sprite):
 
     def __init__(self):
         super().__init__()
-        self.image = pygame.image.load('imagenes/Obstaculo/ñe.png')
+        self.image = pygame.image.load('../../imagenes/Obstaculo/ñe.png')
         self.muerto = False
         self.rect = self.image.get_rect()
         self.rect.y = 430
