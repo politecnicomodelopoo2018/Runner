@@ -13,7 +13,7 @@ class player(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.y=317
         self.rect.x = 300
-        self.GRAVEDAD = 0.05 # Para el nivel GOD 0.1 , para el resto 0.05
+        self.GRAVEDAD = 0.1 # Para el nivel GOD 0.1 , para el resto 0.05
         self.dy = 0
         self.agachado = False
         self.saltando=False
@@ -27,7 +27,7 @@ class player(pygame.sprite.Sprite):
         if self.dy == 0:
             if key[K_UP]:
                 self.saltando = True
-                self.dy = -3.5 # Para el nivel GOD 5 , para el resto -3.5
+                self.dy = -5 # Para el nivel GOD 5 , para el resto -3.5
         else:
             if self.saltando:
                 self.rect.y += self.dy

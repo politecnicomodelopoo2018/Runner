@@ -4,6 +4,7 @@ from Clases.Vidas.Vida import vida
 from Clases.Enemigo.Enemigo import enemigo
 from Clases.Text.Text import score
 from Clases.Obstaculo.Obstaculo import obstaculo
+from Clases.Menu.Registro import registro
 import pygame
 from Clases.Colores import Colores
 # highscore en bdd
@@ -20,7 +21,7 @@ ob = obstaculo()
 v = vida()
 en = enemigo()
 S = score()
-salir = False
+
 pygame.display.set_caption("Boke Games")
 screen = pygame.display.set_mode((1280, 700))
 all_sprites = pygame.sprite.Group()
@@ -31,42 +32,44 @@ Negro = (0, 0, 0)
 Blanco = (255, 255, 255)
 Gris = (200, 200, 200)
 
+class medio(object):
+    def __init__(self):
+        salir = False
+        while not salir:
+            for e in pygame.event.get():
+                if e.type == pygame.KEYDOWN:
+                    if e.key == pygame.K_ESCAPE:
+                        salir = True
 
-while not salir:
-    for e in pygame.event.get():
-        if e.type == pygame.KEYDOWN:
-            if e.key == pygame.K_ESCAPE:
+                if e.type == pygame.KEYDOWN:
+                    if e.key == pygame.K_DOWN:
+                        p.Agacharse(True)
+
+                if e.type == pygame.KEYUP:
+                    if e.key == pygame.K_DOWN:
+                        p.Pararse(True)
+
+            v.fuera_pantalla()
+            v.moverse(0)
+            key = pygame.key.get_pressed()
+            p.salto(key)
+
+            if p.colision(v):
+                v.fuera()
+                S.score +=100
+            if p.colision(en):
                 salir = True
-
-        if e.type == pygame.KEYDOWN:
-            if e.key == pygame.K_DOWN:
-                p.Agacharse(True)
-
-        if e.type == pygame.KEYUP:
-            if e.key == pygame.K_DOWN:
-                p.Pararse(True)
-
-    v.fuera_pantalla()
-    v.moverse(0)
-    key = pygame.key.get_pressed()
-    p.salto(key)
-
-    if p.colision(v):
-        v.fuera()
-        S.score +=100
-    if p.colision(en):
-        en.fuera()
-        salir = True
-    en.moverse(0)
-    en.fuera_pantalla()
-    screen.fill(Gris)
-    all_sprites.draw(screen)
-    pygame.draw.line(screen, Negro, (0, pos_suelo), (1280, pos_suelo))
-    screen.blit(S.show(S.score), (5, 10))
-    en.cambiar_sprite(en.estado)
-    v.cambiar_sprite(v.estado)
-    p.cambiar_sprite(p.estado)
-    pygame.display.flip()
-    pygame.time.wait(3)
+                c = registro(S.score)
+            en.moverse(0)
+            en.fuera_pantalla()
+            screen.fill(Gris)
+            all_sprites.draw(screen)
+            pygame.draw.line(screen, Negro, (0, pos_suelo), (1280, pos_suelo))
+            screen.blit(S.show(S.score), (5, 10))
+            en.cambiar_sprite(en.estado)
+            v.cambiar_sprite(v.estado)
+            p.cambiar_sprite(p.estado)
+            pygame.display.flip()
+            pygame.time.wait(3)
 
 
