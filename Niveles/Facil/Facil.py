@@ -20,7 +20,7 @@ ob = obstaculo()
 v = vida()
 S = score()
 salir = False
-pygame.display.set_caption("testing")
+pygame.display.set_caption("Boke Games")
 screen = pygame.display.set_mode((1280, 700))
 all_sprites = pygame.sprite.Group()
 all_sprites.add(p,v,ob)
