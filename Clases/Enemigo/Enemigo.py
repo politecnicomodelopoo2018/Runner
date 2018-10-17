@@ -30,4 +30,8 @@ class enemigo(pygame.sprite.Sprite):
             self.image=self.sprites[estado]
             self.estado = 0
 
+    def reset(self):
+        self.rect.y = 445
+        self.rect.x = 1300
+        self.estado = 0
 

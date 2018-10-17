@@ -18,5 +18,9 @@ class obstaculo(pygame.sprite.Sprite):
             self.fuera()
     def fuera(self):
         self.rect.x=1360
+    def reset(self):
+        self.rect.y = 430
+        self.rect.x = 1600
+
 
 

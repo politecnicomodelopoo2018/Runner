@@ -48,6 +48,10 @@ class vida(pygame.sprite.Sprite):
             self.image=self.sprites[estado]
             self.estado=0
 
+    def reset(self):
+        self.rect.y = 100
+        self.rect.x = 500
+        self.estado = 0
 
 
 

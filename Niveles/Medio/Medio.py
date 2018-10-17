@@ -34,12 +34,16 @@ Gris = (200, 200, 200)
 
 class medio(object):
     def __init__(self):
-        salir = False
-        while not salir:
+        self.salir = False
+        self.perdio = False
+        en.reset()
+        v.reset()
+        S.reset()
+        while not self.salir:
             for e in pygame.event.get():
                 if e.type == pygame.KEYDOWN:
                     if e.key == pygame.K_ESCAPE:
-                        salir = True
+                        self.salir = True
 
                 if e.type == pygame.KEYDOWN:
                     if e.key == pygame.K_DOWN:
@@ -58,8 +62,10 @@ class medio(object):
                 v.fuera()
                 S.score +=100
             if p.colision(en):
-                salir = True
-                c = registro(S.score)
+                self.salir = True
+                self.perdio = True
+
+
             en.moverse(0)
             en.fuera_pantalla()
             screen.fill(Gris)
@@ -73,3 +79,7 @@ class medio(object):
             pygame.time.wait(3)
 
 
+        if self.salir:
+            if self.perdio:
+                c = registro(S.score)
+                en.fuera_pantalla()

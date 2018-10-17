@@ -19,11 +19,13 @@ class facil(object):
 
 
     def __init__(self):
+        from Clases.Text.Text import score
         pygame.init()
         p = player()
         ob = obstaculo()
         v = vida()
         S = score()
+        self.perdio = False
         self.salir = False
         pygame.display.set_caption("Boke Games")
         screen = pygame.display.set_mode((1280, 700))
@@ -34,7 +36,9 @@ class facil(object):
         Negro = (0, 0, 0)
         Blanco = (255, 255, 255)
         Gris = (200, 200, 200)
-
+        ob.reset()
+        v.reset()
+        S.reset()
         while not self.salir:
             for e in pygame.event.get():
                 if e.type == pygame.KEYDOWN:
@@ -56,7 +60,7 @@ class facil(object):
 
             if p.fuera_pantalla():
                 self.salir = True
-                c = registro(S.score)
+                self.perdio = True
             if p.colision(v):
                 v.fuera()
                 S.score +=100
@@ -73,4 +77,7 @@ class facil(object):
             pygame.display.flip()
             pygame.time.wait(3)
 
+        if self.salir:
+            if self.perdio:
+                r = registro(S.score)
 

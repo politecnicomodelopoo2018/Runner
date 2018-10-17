@@ -11,3 +11,5 @@ class score(object):
     def show(self,score):
         scoretext = self.myfont.render("Score = "+str(score), 1, self.Color)
         return(scoretext)
+    def reset(self):
+        self.score = 0

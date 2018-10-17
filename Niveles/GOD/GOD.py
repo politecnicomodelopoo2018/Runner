@@ -45,7 +45,11 @@ class GOD(object):
     def __init__(self):
         co = Colores()
         self.salir = False
+        self.perdio = False
         estado = 0
+        en.reset()
+        v.reset()
+        S.reset()
         while not self.salir:
             for e in pygame.event.get():
                 if e.type == pygame.KEYDOWN:
@@ -70,7 +74,7 @@ class GOD(object):
                 S.score +=100
             if p.colision(en):
                 en.fuera()
-                c = registro(S.score)
+                self.perdio = True
                 self.salir = True
 
             if estado == 0:
@@ -102,3 +106,6 @@ class GOD(object):
             pygame.time.wait(3)
 
 
+        if self.salir:
+            if self.perdio:
+                c = registro(S.score)
