@@ -15,6 +15,8 @@ class selector(object):
         j = jones()
         ro = player()
         ro.rect.x=865
+        l_image=pygame.image.load('../../imagenes/Player/Logic/Normal.png')
+        j_image=pygame.image.load('../../imagenes/Player/Normal.png')
         all_sprites = pygame.sprite.Group()
         all_sprites.add(r,l,j,ro)
         ro.person='Ronald'
@@ -57,6 +59,8 @@ class selector(object):
             l.toc(estado)
             j.toc(estado)
             screen.blit(fondo.image,(0,0))
+            screen.blit(l_image, (540 , 300))
+            screen.blit(j_image, (225, 300))
             all_sprites.draw(screen)
             pygame.display.flip()
             pygame.time.wait(50)

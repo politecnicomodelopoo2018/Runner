@@ -111,7 +111,7 @@ class GOD(object):
             screen.blit(S.show(S.score), (5, 10))
             en.cambiar_sprite(en.estado)
             v.cambiar_sprite(v.estado)
-            p.cambiar_sprite(p.estado)
+            p.cambiar_sprite()
             n.cambiar_sprite(n.estado)
             pygame.display.flip()
             pygame.time.wait(3)
