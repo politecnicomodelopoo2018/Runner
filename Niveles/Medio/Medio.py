@@ -5,6 +5,8 @@ from Clases.Enemigo.Enemigo import enemigo
 from Clases.Text.Text import score
 from Clases.Obstaculo.Obstaculo import obstaculo
 from Clases.Menu.Registro import registro
+from Clases.DB import db
+from Clases.Menu.Highscores.New_high import new
 import pygame
 from Clases.Colores import Colores
 # highscore en bdd
@@ -21,11 +23,12 @@ ob = obstaculo()
 v = vida()
 en = enemigo()
 S = score()
+n = new()
 
 pygame.display.set_caption("Boke Games")
 screen = pygame.display.set_mode((1280, 700))
 all_sprites = pygame.sprite.Group()
-all_sprites.add(p,v,en)
+all_sprites.add(p,v,en,n)
 pos_suelo=300+240
 dy = 0
 Negro = (0, 0, 0)
@@ -39,7 +42,14 @@ class medio(object):
         en.reset()
         v.reset()
         S.reset()
+        n.mayor = False
+        n.reset()
+        a = db.connect("select Nombre,Puntaje from Jugador order by Puntaje desc limit 1; ")
+        y = []
+        for j in a:
+            y.append(j)
         while not self.salir:
+
             for e in pygame.event.get():
                 if e.type == pygame.KEYDOWN:
                     if e.key == pygame.K_ESCAPE:
@@ -52,6 +62,10 @@ class medio(object):
                 if e.type == pygame.KEYUP:
                     if e.key == pygame.K_DOWN:
                         p.Pararse(True)
+                if e.type == pygame.KEYDOWN:
+                    if e.key == pygame.K_KP0:
+                                    S.score+=2000
+
 
             v.fuera_pantalla()
             v.moverse(0)
@@ -61,6 +75,8 @@ class medio(object):
             if p.colision(v):
                 v.fuera()
                 S.score +=100
+                if S.score > int(y[0]['Puntaje']):
+                    n.mayor=True
             if p.colision(en):
                 self.salir = True
                 self.perdio = True
@@ -75,8 +91,9 @@ class medio(object):
             en.cambiar_sprite(en.estado)
             v.cambiar_sprite(v.estado)
             p.cambiar_sprite(p.estado)
+            n.cambiar_sprite(n.estado)
             pygame.display.flip()
-            pygame.time.wait(3)
+            pygame.time.wait(2)
 
 
         if self.salir:

@@ -2,13 +2,21 @@ import pygame,sys
 from pygame import *
 
 class player(pygame.sprite.Sprite):
-
+    person = 'Jones'  # Jones,Logic,Ronald
 
     def __init__(self):
         super().__init__()
         self.image=pygame.image.load('../../imagenes/Player/Normal.png')
-        self.sprites=[pygame.image.load('../../imagenes/Player/Normal.png'),pygame.image.load('../../imagenes/Player/1(2).png')]
-        self.muerto=False
+        self.sprites = {'Jones':[pygame.image.load('../../imagenes/Player/Normal.png'),
+                                pygame.image.load('../../imagenes/Player/1(2).png')],
+                        'Logic':[pygame.image.load('../../imagenes/Logic/Normal.png'),
+                                pygame.image.load('../../imagenes/Logic/1.png')],
+                        'Ronald':[pygame.image.load('../../imagenes/Ronaldinho/1.png'),
+                                  pygame.image.load('../../imagenes/Ronaldinho/2.png'),
+                                   pygame.image.load('../../imagenes/Ronaldinho/3.png'),
+                                    pygame.image.load('../../imagenes/Ronaldinho/4.png'),
+                                     pygame.image.load('../../imagenes/Ronaldinho/5.png'),
+                                      pygame.image.load('../../imagenes/Ronaldinho/6.png')]}
         self.maximo=100
         self.rect = self.image.get_rect()
         self.rect.y=317
@@ -18,6 +26,7 @@ class player(pygame.sprite.Sprite):
         self.agachado = False
         self.saltando=False
         self.estado=0
+
 
     def colision(self, sprite):
         return self.rect.colliderect(sprite.rect)
@@ -55,13 +64,11 @@ class player(pygame.sprite.Sprite):
 
     def nestor_en_bloque(self):
         self.rect.x-=4
-    def cambiar_sprite(self,estado):
-        if estado == 0:
-            self.image=self.sprites[estado]
-            self.estado=1
-        if estado == 1:
-            self.image=self.sprites[estado]
-            self.estado = 0
+    def cambiar_sprite(self):
+        estado = 0
+        if estado is not len(self.sprites[self.person]):
+            self.image=self.sprites[self.person][estado]
+            estado+=1
     def fuera_pantalla(self):
         if self.rect.x <= -280:
             return True

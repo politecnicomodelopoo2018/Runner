@@ -2,6 +2,7 @@ import pygame
 from Clases.Menu.Background import background
 from Clases.Menu.Botones.Jugar.Jugar import jugar
 from Clases.Menu.Botones.Personaje.Personaje import personaje
+from Clases.Menu.Selector.Fondo import f
 pygame.init()
 salir = False
 b = background()
@@ -30,6 +31,9 @@ while not salir:
             if e.key == pygame.K_RETURN:
                 if estado == 0:
                     j.jugar()
+                elif estado == 1:
+                    p.jugar()
+
 
     screen.blit(b.image, b.rect)
     all_sprites.draw(screen)

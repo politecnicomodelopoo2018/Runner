@@ -1,6 +1,6 @@
 import pygame,sys
 from pygame import *
-
+from Clases.Menu.Selector.Selector import selector
 class personaje(pygame.sprite.Sprite):
 
     def __init__(self):
@@ -12,8 +12,11 @@ class personaje(pygame.sprite.Sprite):
         self.rect.y = 330
         self.rect.x = 530
 
+
     def toc(self,es):
         if es == 1:
             self.image = self.seleccionado
         elif es == 0:
             self.image=self.normal
+    def jugar(self):
+        s = selector()

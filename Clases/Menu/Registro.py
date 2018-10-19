@@ -6,6 +6,7 @@ class registro(object):
         from Clases.Menu.RegistroC.text import puntaje
         from Clases.Menu.Niveles_menu import niveles_menu
         from Clases.DB import db
+        from Clases.Menu.Highscores.HS import hg
         screen = pg.display.set_mode((1280, 700))
         font = pg.font.Font(None, 32)
         clock = pg.time.Clock()
@@ -34,7 +35,7 @@ class registro(object):
                     if active:
                         if event.key == pg.K_RETURN:
                             a = db.connect("INSERT INTO `mydb`.`Jugador` ( `Nombre`, `Puntaje`) VALUES "
-                                           "('%s','%s')" % (text,p.score))
+                                           "('%s',%s)" % (text,int(p.score)))
                             self.salir=True
                         elif event.key == pg.K_BACKSPACE:
                             text = text[:-1]
@@ -50,6 +51,9 @@ class registro(object):
             pg.draw.rect(screen, color, input_box, 2)
             pg.display.flip()
             clock.tick(30)
+
+        if self.salir:
+            a = hg()
 
 
 

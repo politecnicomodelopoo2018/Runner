@@ -7,6 +7,8 @@ from Clases.Obstaculo.Obstaculo import obstaculo
 import pygame
 from Clases.Colores import Colores
 from Clases.Menu.Registro import registro
+from Clases.DB import db
+from Clases.Menu.Highscores.New_high import new
 # highscore en bdd
 # obstaculos/pozos
 # en bdd que se epuedan crear los mapas
@@ -22,12 +24,16 @@ v = vida()
 en = enemigo()
 S = score()
 
-
+a = db.connect("select Nombre,Puntaje from Jugador order by Puntaje desc limit 1; ")
+y = []
+for j in a:
+    y.append(j)
+n = new()
 colorsito = Colores().Gris
 pygame.display.set_caption("Boke Games")
 screen = pygame.display.set_mode((1280, 700))
 all_sprites = pygame.sprite.Group()
-all_sprites.add(p,v,en)
+all_sprites.add(p,v,en,n)
 pos_suelo=300+240
 dy = 0
 
@@ -50,6 +56,8 @@ class GOD(object):
         en.reset()
         v.reset()
         S.reset()
+        n.mayor = False
+        n.reset()
         while not self.salir:
             for e in pygame.event.get():
                 if e.type == pygame.KEYDOWN:
@@ -72,6 +80,8 @@ class GOD(object):
             if p.colision(v):
                 v.fuera()
                 S.score +=100
+                if S.score > int(y[0]['Puntaje']):
+                    n.mayor=True
             if p.colision(en):
                 en.fuera()
                 self.perdio = True
@@ -102,6 +112,7 @@ class GOD(object):
             en.cambiar_sprite(en.estado)
             v.cambiar_sprite(v.estado)
             p.cambiar_sprite(p.estado)
+            n.cambiar_sprite(n.estado)
             pygame.display.flip()
             pygame.time.wait(3)
 

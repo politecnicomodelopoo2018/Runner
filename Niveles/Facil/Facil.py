@@ -5,6 +5,8 @@ from Clases.Enemigo.Enemigo import enemigo
 from Clases.Text.Text import score
 from Clases.Obstaculo.Obstaculo import obstaculo
 from Clases.Menu.Registro import registro
+from Clases.DB import db
+from Clases.Menu.Highscores.New_high import new
 import pygame
 from Clases.Colores import Colores
 # highscore en bdd
@@ -25,17 +27,24 @@ class facil(object):
         ob = obstaculo()
         v = vida()
         S = score()
+        n = new()
         self.perdio = False
         self.salir = False
         pygame.display.set_caption("Boke Games")
         screen = pygame.display.set_mode((1280, 700))
         all_sprites = pygame.sprite.Group()
-        all_sprites.add(p, v, ob)
+        all_sprites.add(p, v, ob,n)
         pos_suelo = 300 + 240
         dy = 0
         Negro = (0, 0, 0)
         Blanco = (255, 255, 255)
         Gris = (200, 200, 200)
+        n.mayor = False
+        n.reset()
+        a = db.connect("select Nombre,Puntaje from Jugador order by Puntaje desc limit 1; ")
+        y = []
+        for j in a:
+            y.append(j)
         ob.reset()
         v.reset()
         S.reset()
@@ -64,6 +73,9 @@ class facil(object):
             if p.colision(v):
                 v.fuera()
                 S.score +=100
+                if S.score > int(y[0]['Puntaje']):
+                    n.mayor=True
+
             if p.colision(ob):
                 p.nestor_en_bloque()
             ob.moverse()
@@ -74,8 +86,9 @@ class facil(object):
             screen.blit(S.show(S.score), (5, 10))
             v.cambiar_sprite(v.estado)
             p.cambiar_sprite(p.estado)
+            n.cambiar_sprite(n.estado)
             pygame.display.flip()
-            pygame.time.wait(3)
+            pygame.time.wait(2)
 
         if self.salir:
             if self.perdio:
