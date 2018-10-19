@@ -17,6 +17,7 @@ class player(pygame.sprite.Sprite):
                                     pygame.image.load('../../imagenes/Player/Ronaldinho/4.png'),
                                      pygame.image.load('../../imagenes/Player/Ronaldinho/5.png'),
                                       pygame.image.load('../../imagenes/Player/Ronaldinho/6.png')]}
+
         self.maximo=100
         self.rect = self.image.get_rect()
         self.rect.y=317
@@ -26,7 +27,6 @@ class player(pygame.sprite.Sprite):
         self.agachado = False
         self.saltando=False
         self.estado=0
-
 
     def colision(self, sprite):
         return self.rect.colliderect(sprite.rect)

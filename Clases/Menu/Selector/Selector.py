@@ -5,6 +5,7 @@ from Clases.DB import db
 from Clases.Menu.Selector.Ronald.Boton import ronald
 from Clases.Menu.Selector.Logic.Boton import logic
 from Clases.Menu.Selector.Indiana.Boton import jones
+from Clases.player.Player import player
 import pygame
 class selector(object):
     def __init__(self):
@@ -12,14 +13,18 @@ class selector(object):
         r = ronald()
         l = logic()
         j = jones()
+        ro = player()
+        ro.rect.x=865
         all_sprites = pygame.sprite.Group()
-        all_sprites.add(r,l,j)
+        all_sprites.add(r,l,j,ro)
+        ro.person='Ronald'
         pygame.init()
         self.salir = False
         screen = pygame.display.set_mode((1280, 700))
         fondo = f()
 
         while not self.salir:
+            ro.cambiar_sprite()
             for e in pygame.event.get():
 
                 if e.type == pygame.KEYDOWN:
@@ -40,7 +45,6 @@ class selector(object):
                             if estado is 1 :
                                 l.jugar()
                             if estado is 2:
-                                print('r')
                                 r.jugar()
 
 
@@ -55,4 +59,4 @@ class selector(object):
             screen.blit(fondo.image,(0,0))
             all_sprites.draw(screen)
             pygame.display.flip()
-            pygame.time.wait(3)
+            pygame.time.wait(50)
