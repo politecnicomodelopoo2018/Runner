@@ -48,21 +48,22 @@ Rosa = (248, 67, 253)
 
 color = Gris
 class GOD(object):
-    def __init__(self):
+    @staticmethod
+    def iniciar():
         co = Colores()
-        self.salir = False
-        self.perdio = False
+        salir = False
+        perdio = False
         estado = 0
         en.reset()
         v.reset()
         S.reset()
         n.mayor = False
         n.reset()
-        while not self.salir:
+        while not salir:
             for e in pygame.event.get():
                 if e.type == pygame.KEYDOWN:
                     if e.key == pygame.K_ESCAPE:
-                        self.salir = True
+                        salir = True
 
                 if e.type == pygame.KEYDOWN:
                     if e.key == pygame.K_DOWN:
@@ -84,8 +85,8 @@ class GOD(object):
                     n.mayor=True
             if p.colision(en):
                 en.fuera()
-                self.perdio = True
-                self.salir = True
+                perdio = True
+                salir = True
 
             if estado == 0:
                 estado = 1
@@ -117,6 +118,6 @@ class GOD(object):
             pygame.time.wait(3)
 
 
-        if self.salir:
-            if self.perdio:
-                c = registro(S.score)
+        if salir:
+            if perdio:
+                registro.inicio(S.score)

@@ -20,5 +20,8 @@ class tres(pygame.sprite.Sprite):
         elif es is not 2:
             self.image = self.normal
     def jugar(self):
-        b = GOD()
+        GOD.iniciar()
+    def reset(self):
+        self.image = pygame.image.load('../../imagenes/Menu/Botones/Niveles/3/rsz_2normal.png')
+
 

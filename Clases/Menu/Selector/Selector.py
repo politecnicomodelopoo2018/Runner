@@ -8,7 +8,8 @@ from Clases.Menu.Selector.Indiana.Boton import jones
 from Clases.player.Player import player
 import pygame
 class selector(object):
-    def __init__(self):
+    @staticmethod
+    def inicio():
         estado = 0
         r = ronald()
         l = logic()
@@ -21,11 +22,11 @@ class selector(object):
         all_sprites.add(r,l,j,ro)
         ro.person='Ronald'
         pygame.init()
-        self.salir = False
+        salir = False
         screen = pygame.display.set_mode((1280, 700))
         fondo = f()
 
-        while not self.salir:
+        while not salir:
             ro.cambiar_sprite()
             for e in pygame.event.get():
 
@@ -52,7 +53,7 @@ class selector(object):
 
                 if e.type == pygame.KEYDOWN:
                     if e.key == pygame.K_ESCAPE:
-                        self.salir = True
+                        salir = True
 
 
             r.toc(estado)

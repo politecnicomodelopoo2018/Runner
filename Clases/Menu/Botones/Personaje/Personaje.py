@@ -19,4 +19,4 @@ class personaje(pygame.sprite.Sprite):
         elif es == 0:
             self.image=self.normal
     def jugar(self):
-        s = selector()
+        selector.inicio()

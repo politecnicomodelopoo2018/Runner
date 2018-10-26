@@ -19,5 +19,9 @@ class uno(pygame.sprite.Sprite):
         elif es is not 0:
             self.image=self.normal
     def jugar(self):
-        b = facil()
+        facil.iniciar()
+    def reset(self):
+        self.image = pygame.image.load('../../imagenes/Menu/Botones/Niveles/1/rsz_normal(1).png')
+
+
 

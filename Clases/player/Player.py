@@ -16,7 +16,13 @@ class player(pygame.sprite.Sprite):
                                    pygame.image.load('../../imagenes/Player/Ronaldinho/3.png'),
                                     pygame.image.load('../../imagenes/Player/Ronaldinho/4.png'),
                                      pygame.image.load('../../imagenes/Player/Ronaldinho/5.png'),
-                                      pygame.image.load('../../imagenes/Player/Ronaldinho/6.png')]}
+                                      pygame.image.load('../../imagenes/Player/Ronaldinho/6.png'),
+                                        pygame.image.load('../../imagenes/Player/Ronaldinho/7.png'),
+                                         pygame.image.load('../../imagenes/Player/Ronaldinho/8.png'),
+                                          pygame.image.load('../../imagenes/Player/Ronaldinho/9.png'),
+                                            pygame.image.load('../../imagenes/Player/Ronaldinho/10.png'),
+                                             pygame.image.load('../../imagenes/Player/Ronaldinho/11.png'),
+                                              pygame.image.load('../../imagenes/Player/Ronaldinho/12.png')]}
 
         self.maximo=100
         self.rect = self.image.get_rect()

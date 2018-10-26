@@ -19,8 +19,8 @@ from pygame import QUIT, K_LEFT, K_RIGHT, K_UP
 
 class facil(object):
 
-
-    def __init__(self):
+    @staticmethod
+    def iniciar():
         from Clases.Text.Text import score
         pygame.init()
         p = player()
@@ -28,8 +28,8 @@ class facil(object):
         v = vida()
         S = score()
         n = new()
-        self.perdio = False
-        self.salir = False
+        perdio = False
+        salir = False
         pygame.display.set_caption("Boke Games")
         screen = pygame.display.set_mode((1280, 700))
         all_sprites = pygame.sprite.Group()
@@ -48,11 +48,11 @@ class facil(object):
         ob.reset()
         v.reset()
         S.reset()
-        while not self.salir:
+        while not salir:
             for e in pygame.event.get():
                 if e.type == pygame.KEYDOWN:
                     if e.key == pygame.K_ESCAPE:
-                        self.salir = True
+                        salir = True
 
                 if e.type == pygame.KEYDOWN:
                     if e.key == pygame.K_DOWN:
@@ -68,8 +68,8 @@ class facil(object):
             p.salto(key)
 
             if p.fuera_pantalla():
-                self.salir = True
-                self.perdio = True
+                salir = True
+                perdio = True
             if p.colision(v):
                 v.fuera()
                 S.score +=100
@@ -85,12 +85,12 @@ class facil(object):
             pygame.draw.line(screen, Negro, (0, pos_suelo), (1280, pos_suelo))
             screen.blit(S.show(S.score), (5, 10))
             v.cambiar_sprite(v.estado)
-            p.cambiar_sprite(p.estado)
+            p.cambiar_sprite()
             n.cambiar_sprite(n.estado)
             pygame.display.flip()
             pygame.time.wait(2)
 
-        if self.salir:
-            if self.perdio:
-                r = registro(S.score)
+        if salir:
+            if perdio:
+                registro.inicio(S.score)
 

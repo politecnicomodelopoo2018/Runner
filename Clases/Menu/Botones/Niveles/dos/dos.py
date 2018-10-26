@@ -21,3 +21,5 @@ class dos(pygame.sprite.Sprite):
             self.image = self.normal
     def jugar(self):
         b = medio()
+    def reset(self):
+        self.image = pygame.image.load('../../imagenes/Menu/Botones/Niveles/2/rsz_1normal(1).png')

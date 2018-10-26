@@ -97,5 +97,5 @@ class medio(object):
 
         if self.salir:
             if self.perdio:
-                c = registro(S.score)
+                registro.inicio(S.score)
                 en.fuera_pantalla()

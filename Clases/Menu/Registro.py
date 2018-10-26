@@ -1,6 +1,7 @@
 
 class registro(object):
-    def __init__(self,h):
+    @staticmethod
+    def inicio(h):
         import pygame as pg
         from Clases.Menu.Background import background
         from Clases.Menu.RegistroC.text import puntaje
@@ -19,12 +20,12 @@ class registro(object):
         b = background()
         p = puntaje()
         p.score=h
-        self.salir = False
+        salir = False
 
-        while not self.salir:
+        while not salir:
             for event in pg.event.get():
                 if event.type == pg.QUIT:
-                    self.salir = True
+                    salir = True
                 if event.type == pg.MOUSEBUTTONDOWN:
                     if input_box.collidepoint(event.pos):
                         active = not active
@@ -36,7 +37,7 @@ class registro(object):
                         if event.key == pg.K_RETURN:
                             a = db.connect("INSERT INTO `mydb`.`Jugador` ( `Nombre`, `Puntaje`) VALUES "
                                            "('%s',%s)" % (text,int(p.score)))
-                            self.salir=True
+                            salir=True
                         elif event.key == pg.K_BACKSPACE:
                             text = text[:-1]
                         else:
@@ -52,8 +53,8 @@ class registro(object):
             pg.display.flip()
             clock.tick(30)
 
-        if self.salir:
-            a = hg()
+        if salir:
+            hg.iniciar()
 
 
 

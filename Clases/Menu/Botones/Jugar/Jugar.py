@@ -20,4 +20,4 @@ class jugar(pygame.sprite.Sprite):
             self.image=self.normal
     def jugar(self):
 
-        b = niveles_menu()
+        niveles_menu.iniciar()

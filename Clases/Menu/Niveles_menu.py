@@ -3,6 +3,7 @@ from Clases.Menu.Background import background
 from Clases.Menu.Botones.Niveles.uno.uno import uno
 from Clases.Menu.Botones.Niveles.dos.dos import dos
 from Clases.Menu.Botones.Niveles.tres.tres import tres
+
 pygame.init()
 
 b = background()
@@ -14,10 +15,11 @@ all_sprites = pygame.sprite.Group()
 all_sprites.add(uno,dos,tres)
 
 class niveles_menu(object):
-    def __init__(self):
+    @staticmethod
+    def iniciar():
         estado = 0
-        self.salir = False
-        while not self.salir:
+        salir = False
+        while not salir:
             uno.toc(estado)
             dos.toc(estado)
             tres.toc(estado)
@@ -44,8 +46,13 @@ class niveles_menu(object):
                                 tres.jugar()
                     if e.type == pygame.KEYDOWN:
                         if e.key == pygame.K_ESCAPE:
-                            self.salir = True
+                            salir = True
+                            uno.reset()
+                            dos.reset()
+                            tres.reset()
+                            estado=0
             screen.blit(b.image, b.rect)
             all_sprites.draw(screen)
             pygame.display.flip()
             pygame.time.wait(3)
+
