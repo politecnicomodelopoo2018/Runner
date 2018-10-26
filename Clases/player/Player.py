@@ -77,9 +77,13 @@ class player(pygame.sprite.Sprite):
         if self.estado == len(self.sprites[self.person]):
             self.estado=0
     def fuera_pantalla(self):
-        if self.rect.x <= -280:
+        if self.rect.x <= -100:
             return True
 
+    def reset(self):
+        self.rect.y = 317
+        self.rect.x = 300
+        self.estado = 0
 
 
 

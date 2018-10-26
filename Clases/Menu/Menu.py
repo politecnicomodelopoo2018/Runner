@@ -2,17 +2,19 @@ import pygame,sys
 from Clases.Menu.Background import background
 from Clases.Menu.Botones.Jugar.Jugar import jugar
 from Clases.Menu.Botones.Personaje.Personaje import personaje
+
+pygame.init()
+salir = False
+b = background()
+j = jugar()
+p = personaje()
+screen = pygame.display.set_mode((1280, 700))
+all_sprites = pygame.sprite.Group()
+all_sprites.add(j, p)
 class menu(object):
     @staticmethod
     def iniciar():
-        pygame.init()
-        salir = False
-        b = background()
-        j = jugar()
-        p = personaje()
-        screen = pygame.display.set_mode((1280, 700))
-        all_sprites = pygame.sprite.Group()
-        all_sprites.add(j, p)
+
         estado = 0
         while not salir:
             j.toc(estado)

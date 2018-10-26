@@ -9,6 +9,7 @@ from Clases.Colores import Colores
 from Clases.Menu.Registro import registro
 from Clases.DB import db
 from Clases.Menu.Highscores.New_high import new
+from Clases.Menu.Highscores.Scores import scores
 # highscore en bdd
 # obstaculos/pozos
 # en bdd que se epuedan crear los mapas
@@ -24,10 +25,7 @@ v = vida()
 en = enemigo()
 S = score()
 
-a = db.connect("select Nombre,Puntaje from Jugador order by Puntaje desc limit 1; ")
-y = []
-for j in a:
-    y.append(j)
+high = scores.cargar()
 n = new()
 colorsito = Colores().Gris
 pygame.display.set_caption("Boke Games")
@@ -59,6 +57,7 @@ class GOD(object):
         S.reset()
         n.mayor = False
         n.reset()
+        p.reset()
         while not salir:
             for e in pygame.event.get():
                 if e.type == pygame.KEYDOWN:
@@ -81,7 +80,7 @@ class GOD(object):
             if p.colision(v):
                 v.fuera()
                 S.score +=100
-                if S.score > int(y[0]['Puntaje']):
+                if S.score > high[0].puntaje:
                     n.mayor=True
             if p.colision(en):
                 en.fuera()

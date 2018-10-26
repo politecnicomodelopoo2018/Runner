@@ -1,5 +1,6 @@
 # -*- encoding: utf-8 -*-
 from Clases.Menu.Highscores.Fondo import f
+from Clases.Menu.Menu import menu
 from Clases.Menu.Highscores.Text import text
 from Clases.Menu.Highscores.Scores import scores
 from Clases.Menu.Niveles_menu import niveles_menu
@@ -16,17 +17,14 @@ class hg(object):
         jugador4 = text()
         screen = pygame.display.set_mode((1280, 700))
         fondo = f()
-        lista_scores = []
-        for z in range(4):
-            a = scores()
-            a.cargar(z)
-            lista_scores.append(a)
+        lista_scores = scores.cargar()
         while not salir:
             for e in pygame.event.get():
 
                 if e.type == pygame.KEYDOWN:
                     if e.key == pygame.K_ESCAPE:
-                        salir=True
+                        from Clases.Menu.Menu import menu
+                        menu.iniciar()
 
 
             screen.blit(fondo.image,(0,0))
@@ -40,5 +38,4 @@ class hg(object):
             screen.blit(jugador4.showPuntaje(lista_scores[3].puntaje), (850, 465))
             pygame.display.flip()
             pygame.time.wait(3)
-        if salir:
-            niveles_menu.iniciar()
+

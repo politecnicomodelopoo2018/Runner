@@ -4,6 +4,7 @@ from Clases.Menu.Botones.Niveles.uno.uno import uno
 from Clases.Menu.Botones.Niveles.dos.dos import dos
 from Clases.Menu.Botones.Niveles.tres.tres import tres
 
+
 pygame.init()
 
 b = background()
@@ -46,11 +47,8 @@ class niveles_menu(object):
                                 tres.jugar()
                     if e.type == pygame.KEYDOWN:
                         if e.key == pygame.K_ESCAPE:
-                            salir = True
-                            uno.reset()
-                            dos.reset()
-                            tres.reset()
-                            estado=0
+                            from Clases.Menu.Menu import menu
+                            menu.iniciar()
             screen.blit(b.image, b.rect)
             all_sprites.draw(screen)
             pygame.display.flip()

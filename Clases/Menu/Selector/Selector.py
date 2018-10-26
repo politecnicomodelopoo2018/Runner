@@ -53,7 +53,9 @@ class selector(object):
 
                 if e.type == pygame.KEYDOWN:
                     if e.key == pygame.K_ESCAPE:
-                        salir = True
+                        from Clases.Menu.Menu import menu
+                        menu.iniciar()
+
 
 
             r.toc(estado)

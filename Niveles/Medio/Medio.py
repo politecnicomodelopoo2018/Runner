@@ -7,6 +7,7 @@ from Clases.Obstaculo.Obstaculo import obstaculo
 from Clases.Menu.Registro import registro
 from Clases.DB import db
 from Clases.Menu.Highscores.New_high import new
+from Clases.Menu.Highscores.Scores import scores
 import pygame
 from Clases.Colores import Colores
 # highscore en bdd
@@ -42,12 +43,10 @@ class medio(object):
         en.reset()
         v.reset()
         S.reset()
+        p.reset()
         n.mayor = False
         n.reset()
-        a = db.connect("select Nombre,Puntaje from Jugador order by Puntaje desc limit 1; ")
-        y = []
-        for j in a:
-            y.append(j)
+        high = scores.cargar()
         while not self.salir:
 
             for e in pygame.event.get():
@@ -68,20 +67,20 @@ class medio(object):
 
 
             v.fuera_pantalla()
-            v.moverse(0)
+            v.moverse(2)
             key = pygame.key.get_pressed()
             p.salto(key)
 
             if p.colision(v):
                 v.fuera()
                 S.score +=100
-                if S.score > int(y[0]['Puntaje']):
+                if S.score > high[0].puntaje:
                     n.mayor=True
             if p.colision(en):
                 self.salir = True
                 self.perdio = True
 
-            en.moverse(0)
+            en.moverse(2)
             en.fuera_pantalla()
             screen.fill(Gris)
             all_sprites.draw(screen)

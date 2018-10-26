@@ -7,6 +7,7 @@ from Clases.Obstaculo.Obstaculo import obstaculo
 from Clases.Menu.Registro import registro
 from Clases.DB import db
 from Clases.Menu.Highscores.New_high import new
+from Clases.Menu.Highscores.Scores import scores
 import pygame
 from Clases.Colores import Colores
 # highscore en bdd
@@ -41,13 +42,11 @@ class facil(object):
         Gris = (200, 200, 200)
         n.mayor = False
         n.reset()
-        a = db.connect("select Nombre,Puntaje from Jugador order by Puntaje desc limit 1; ")
-        y = []
-        for j in a:
-            y.append(j)
+        high = scores.cargar()
         ob.reset()
         v.reset()
         S.reset()
+        p.reset()
         while not salir:
             for e in pygame.event.get():
                 if e.type == pygame.KEYDOWN:
@@ -63,7 +62,7 @@ class facil(object):
                         p.Pararse(True)
 
             v.fuera_pantalla()
-            v.moverse(0)
+            v.moverse(2)
             key = pygame.key.get_pressed()
             p.salto(key)
 
@@ -73,7 +72,7 @@ class facil(object):
             if p.colision(v):
                 v.fuera()
                 S.score +=100
-                if S.score > int(y[0]['Puntaje']):
+                if S.score > high[0].puntaje:
                     n.mayor=True
 
             if p.colision(ob):
