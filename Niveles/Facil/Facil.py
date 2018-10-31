@@ -83,7 +83,7 @@ class facil(object):
             all_sprites.draw(screen)
             pygame.draw.line(screen, Negro, (0, pos_suelo), (1280, pos_suelo))
             screen.blit(S.show(S.score), (5, 10))
-            v.cambiar_sprite(v.estado)
+            v.cambiar_sprite()
             p.cambiar_sprite()
             n.cambiar_sprite(n.estado)
             pygame.display.flip()

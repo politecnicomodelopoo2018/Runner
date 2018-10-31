@@ -35,27 +35,24 @@ while not salir:
         x += 1
 
     # animación de salto
-    if dy == 0:               # si está en el suelo..."
+    if dy == 0:  # si está en el suelo..."
         if key[K_UP]:
             dy = -2
             print('up')
     else:
-        y += dy                  # empuja el personaje hacia abajo
-        dy += GRAVEDAD           # y acelera su caida
+        y += dy  # empuja el personaje hacia abajo
+        dy += GRAVEDAD  # y acelera su caida
 
-        if y > pos_suelo:        # detiene la caida en el suelo
+        if y > pos_suelo:  # detiene la caida en el suelo
             dy = 0
             y = pos_suelo
-
     # aplica la posición al personaje
     personaje.bottom = int(y)
     personaje.centerx = int(x)
-
     # Actualización gráfica
     screen.fill((200, 200, 200))
     pygame.draw.line(screen, color_negro, (0, pos_suelo), (320, pos_suelo))
     screen.fill(color_rojo, personaje)
     pygame.display.flip()
-
     # Espera un instante
     pygame.time.wait(1)

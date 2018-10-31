@@ -28,24 +28,11 @@ class vida(pygame.sprite.Sprite):
 
     def colision(self, sprite):
         return self.rect.colliderect(sprite.rect)
-    def cambiar_sprite(self,estado):
-        if estado==0:
-            self.image=self.sprites[estado]
-            self.estado=1
-        if estado==1:
-            self.image=self.sprites[estado]
-            self.estado=2
-        if estado==2:
-            self.image=self.sprites[estado]
-            self.estado=3
-        if estado==3:
-            self.image=self.sprites[estado]
-            self.estado=4
-        if estado==4:
-            self.image=self.sprites[estado]
-            self.estado=5
-        if estado==5:
-            self.image=self.sprites[estado]
+    def cambiar_sprite(self):
+        if self.estado <len(self.sprites):
+            self.image=self.sprites[self.estado]
+            self.estado+=1
+        if self.estado == len(self.sprites):
             self.estado=0
 
     def reset(self):

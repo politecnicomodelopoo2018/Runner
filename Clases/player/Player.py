@@ -6,6 +6,7 @@ class player(pygame.sprite.Sprite):
 
     def __init__(self):
         super().__init__()
+
         self.image=pygame.image.load('../../imagenes/Player/Normal.png')
         self.sprites = {'Jones':[pygame.image.load('../../imagenes/Player/Normal.png'),
                                 pygame.image.load('../../imagenes/Player/1(2).png')],

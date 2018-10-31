@@ -22,13 +22,12 @@ class enemigo(pygame.sprite.Sprite):
             self.fuera()
     def fuera(self):
         self.rect.x=1360
-    def cambiar_sprite(self,estado):
-        if estado == 0:
-            self.image=self.sprites[estado]
-            self.estado=1
-        if estado == 1:
-            self.image=self.sprites[estado]
-            self.estado = 0
+    def cambiar_sprite(self):
+        if self.estado <len(self.sprites):
+            self.image=self.sprites[self.estado]
+            self.estado+=1
+        if self.estado == len(self.sprites):
+            self.estado=0
 
     def reset(self):
         self.rect.y = 445
